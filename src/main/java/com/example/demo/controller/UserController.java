@@ -17,17 +17,14 @@ public class UserController {
     UserService userService;
 
 
-    @GetMapping("")
-    String hello() {
-        return "Hello World from Maven";
-    }
 
-    @GetMapping("/users")
+
+    @GetMapping("/")
     public List<User> list() {
         return userService.listAllUser();
     }
 
-    @GetMapping("/users/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<User> get(@PathVariable Integer id) {
         try {
             User user = userService.getUser(id);
@@ -36,12 +33,12 @@ public class UserController {
             return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
         }
     }
-    @PostMapping("/users")
+    @PostMapping("/")
     public void add(@RequestBody User user) {
         userService.saveUser(user);
         return;
     }
-    @PutMapping("/users/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<?> update(@RequestBody User user, @PathVariable Integer id) {
         try {
             User existUser = userService.getUser(id);
@@ -52,7 +49,7 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-    @DeleteMapping("/users/{id}")
+    @DeleteMapping("/{id}")
     public void delete(@PathVariable Integer id) {
 
         userService.deleteUser(id);
